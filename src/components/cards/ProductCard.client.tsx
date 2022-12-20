@@ -31,7 +31,7 @@ export function ProductCard({
   onClick?: () => void;
 }) {
   // eslint-disable-next-line no-console
-  console.log('product handle:', product.handle);
+  console.log('product handle main:', product.handle);
 
   let cardLabel;
 
