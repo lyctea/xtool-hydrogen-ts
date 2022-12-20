@@ -27,6 +27,9 @@ function App({request}: HydrogenRouteProps) {
 
   const {customerAccessToken} = useSession();
 
+  // eslint-disable-next-line no-console
+  console.log('welcome to hydrogen!');
+
   useServerAnalytics({
     shopify: {
       isLoggedIn: !!customerAccessToken,
