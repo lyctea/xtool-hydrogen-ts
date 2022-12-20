@@ -30,9 +30,6 @@ export function ProductCard({
   loading?: HTMLImageElement['loading'];
   onClick?: () => void;
 }) {
-  // eslint-disable-next-line no-console
-  console.log('handle123: ==>', product.handle);
-
   let cardLabel;
 
   const cardData = product?.variants ? product : getProductPlaceholder();
