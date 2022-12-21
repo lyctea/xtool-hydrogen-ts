@@ -136,6 +136,7 @@ function MobileHeader({
   );
 }
 
+// PC端菜单TODO:
 function DesktopHeader({
   countryCode,
   isHome,
@@ -154,13 +155,7 @@ function DesktopHeader({
   const styles = {
     button:
       'relative flex items-center justify-center w-8 h-8 focus:ring-primary/5',
-    container: `${
-      isHome
-        ? 'bg-primary/80 dark:bg-contrast/60 text-contrast dark:text-primary shadow-darkHeader'
-        : 'bg-contrast/80 text-primary'
-    } ${
-      y > 50 && !isHome ? 'shadow-lightHeader ' : ''
-    }hidden h-nav lg:flex items-center sticky transition duration-300 backdrop-blur-lg z-40 top-0 justify-between w-full leading-none gap-8 px-12 py-8`,
+    container: '',
   };
 
   return (

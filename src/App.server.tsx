@@ -50,7 +50,9 @@ function App({request}: HydrogenRouteProps) {
           countryCode={countryCode}
           customerAccessToken={customerAccessToken}
         >
+          {/* Router: Provides the context for routing in your Hydrogen storefront */}
           <Router>
+            {/* FileRoutes: 一般与 import.meta.globEager结合使用，可用于多语言路由的重定向*/}
             <FileRoutes
               basePath={countryCode ? `/${countryCode}/` : undefined}
             />

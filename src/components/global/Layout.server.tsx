@@ -6,7 +6,7 @@ import {Header} from '~/components';
 import {Footer} from '~/components/index.server';
 import {parseMenu} from '~/lib/utils';
 
-const HEADER_MENU_HANDLE = 'main-menu';
+const HEADER_MENU_HANDLE = 'xtool-new-main-menu';
 const FOOTER_MENU_HANDLE = 'footer';
 
 const SHOP_NAME_FALLBACK = 'Hydrogen';
@@ -113,6 +113,9 @@ const SHOP_QUERY = gql`
         ...MenuItem
         items {
           ...MenuItem
+          items {
+            ...MenuItem
+          }
         }
       }
     }
