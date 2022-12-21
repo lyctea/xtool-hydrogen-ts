@@ -1,4 +1,4 @@
-import {Link, useUrl, useCart} from '@shopify/hydrogen';
+import {Link, useUrl, useCart, Image} from '@shopify/hydrogen';
 import {useWindowScroll} from 'react-use';
 
 import {
@@ -50,14 +50,155 @@ export function Header({title, menu}: {title: string; menu?: EnhancedMenu}) {
         menu={menu}
         openCart={openCart}
       />
-      <MobileHeader
+      {/* <MobileHeader
         countryCode={countryCode}
         isHome={isHome}
         title={title}
         openCart={openCart}
         openMenu={openMenu}
-      />
+      /> */}
     </>
+  );
+}
+
+function DesktopHeader({
+  countryCode,
+  isHome,
+  menu,
+  openCart,
+  title,
+}: {
+  countryCode?: string | null;
+  isHome: boolean;
+  openCart: () => void;
+  menu?: EnhancedMenu;
+  title: string;
+}) {
+  const styles = {
+    button:
+      'relative flex items-center justify-center w-8 h-8 focus:ring-primary/5',
+    container: 'w-full flex',
+  };
+  return (
+    <header
+      role="banner"
+      className="w-full flex justify-around items-center bg-red-300 h-11 px-10"
+    >
+      <Link to="/">
+        <Image
+          src="https://cdn.shopify.com/s/files/1/0467/7985/9095/files/20211119-logo-xtool_150x.png?v=1637285326"
+          width={150}
+          height={150}
+          alt="xtool-logo"
+        />
+      </Link>
+      <div>
+        <nav>
+          {(menu?.items || []).map((item) => (
+            <Link key={item.id} to={item.to} target={item.target}>
+              <span dangerouslySetInnerHTML={{__html: item.title}}></span>
+            </Link>
+          ))}
+        </nav>
+      </div>
+      <div className="flex items-center gap-1">
+        <form
+          action={`/${countryCode ? countryCode + '/' : ''}search`}
+          className="flex items-center gap-2"
+        >
+          <Input
+            className={
+              isHome
+                ? 'focus:border-contrast/20 dark:focus:border-primary/20'
+                : 'focus:border-primary/20'
+            }
+            type="search"
+            variant="minisearch"
+            placeholder="Search"
+            name="q"
+          />
+          <button type="submit" className={styles.button}>
+            <IconSearch />
+          </button>
+        </form>
+        <Link to={'/account'} className={styles.button}>
+          <IconAccount />
+        </Link>
+        <button onClick={openCart} className={styles.button}>
+          <IconBag />
+          <CartBadge dark={isHome} />
+        </button>
+      </div>
+    </header>
+  );
+}
+
+// PC端菜单TODO:
+function DesktopHeaderDemo({
+  countryCode,
+  isHome,
+  menu,
+  openCart,
+  title,
+}: {
+  countryCode?: string | null;
+  isHome: boolean;
+  openCart: () => void;
+  menu?: EnhancedMenu;
+  title: string;
+}) {
+  const {y} = useWindowScroll();
+
+  const styles = {
+    button:
+      'relative flex items-center justify-center w-8 h-8 focus:ring-primary/5',
+    container: '',
+  };
+
+  return (
+    <header role="banner" className={styles.container}>
+      <div className="flex gap-12">
+        <Link className={`font-bold`} to="/">
+          {title}
+        </Link>
+        <nav className="flex gap-8">
+          {/* Top level menu items */}
+          {(menu?.items || []).map((item) => (
+            <Link key={item.id} to={item.to} target={item.target}>
+              {item.title}
+            </Link>
+          ))}
+        </nav>
+      </div>
+      <div className="flex items-center gap-1">
+        <form
+          action={`/${countryCode ? countryCode + '/' : ''}search`}
+          className="flex items-center gap-2"
+        >
+          <Input
+            className={
+              isHome
+                ? 'focus:border-contrast/20 dark:focus:border-primary/20'
+                : 'focus:border-primary/20'
+            }
+            type="search"
+            variant="minisearch"
+            placeholder="Search"
+            name="q"
+          />
+          <button type="submit" className={styles.button}>
+            <IconSearch />
+          </button>
+        </form>
+        <Link to={'/account'} className={styles.button}>
+          <IconAccount />
+        </Link>
+        <button onClick={openCart} className={styles.button}>
+          <IconBag />
+          <CartBadge dark={isHome} />
+        </button>
+      </div>
+    </header>
   );
 }
 
@@ -124,75 +265,6 @@ function MobileHeader({
       </Link>
 
       <div className="flex items-center justify-end w-full gap-4">
-        <Link to={'/account'} className={styles.button}>
-          <IconAccount />
-        </Link>
-        <button onClick={openCart} className={styles.button}>
-          <IconBag />
-          <CartBadge dark={isHome} />
-        </button>
-      </div>
-    </header>
-  );
-}
-
-// PC端菜单TODO:
-function DesktopHeader({
-  countryCode,
-  isHome,
-  menu,
-  openCart,
-  title,
-}: {
-  countryCode?: string | null;
-  isHome: boolean;
-  openCart: () => void;
-  menu?: EnhancedMenu;
-  title: string;
-}) {
-  const {y} = useWindowScroll();
-
-  const styles = {
-    button:
-      'relative flex items-center justify-center w-8 h-8 focus:ring-primary/5',
-    container: '',
-  };
-
-  return (
-    <header role="banner" className={styles.container}>
-      <div className="flex gap-12">
-        <Link className={`font-bold`} to="/">
-          {title}
-        </Link>
-        <nav className="flex gap-8">
-          {/* Top level menu items */}
-          {(menu?.items || []).map((item) => (
-            <Link key={item.id} to={item.to} target={item.target}>
-              {item.title}
-            </Link>
-          ))}
-        </nav>
-      </div>
-      <div className="flex items-center gap-1">
-        <form
-          action={`/${countryCode ? countryCode + '/' : ''}search`}
-          className="flex items-center gap-2"
-        >
-          <Input
-            className={
-              isHome
-                ? 'focus:border-contrast/20 dark:focus:border-primary/20'
-                : 'focus:border-primary/20'
-            }
-            type="search"
-            variant="minisearch"
-            placeholder="Search"
-            name="q"
-          />
-          <button type="submit" className={styles.button}>
-            <IconSearch />
-          </button>
-        </form>
         <Link to={'/account'} className={styles.button}>
           <IconAccount />
         </Link>
