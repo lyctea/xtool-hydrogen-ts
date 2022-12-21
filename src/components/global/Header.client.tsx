@@ -4,6 +4,7 @@ import {useWindowScroll} from 'react-use';
 import {
   Heading,
   IconAccount,
+  IconArrow,
   IconBag,
   IconMenu,
   IconSearch,
@@ -82,7 +83,7 @@ function DesktopHeader({
   return (
     <header
       role="banner"
-      className="w-full flex justify-around items-center bg-red-300 h-11 px-10"
+      className="w-full flex justify-around items-center h-11 bg-purple-200 px-40"
     >
       <Link to="/">
         <Image
@@ -92,14 +93,23 @@ function DesktopHeader({
           alt="xtool-logo"
         />
       </Link>
-      <div>
-        <nav>
-          {(menu?.items || []).map((item) => (
-            <Link key={item.id} to={item.to} target={item.target}>
-              <span dangerouslySetInnerHTML={{__html: item.title}}></span>
-            </Link>
-          ))}
-        </nav>
+      <div className="flex">
+        {(menu?.items || []).map((item) => (
+          <Link
+            key={item.id}
+            to={item.to}
+            target={item.target}
+            className="flex p-2 px-4 text-sm font-medium hover:underline underline-offset-8"
+          >
+            <span
+              dangerouslySetInnerHTML={{__html: item.title}}
+              className="pr-1"
+            ></span>
+            {item.items.length ? (
+              <IconArrow direction="down" className="w-3"></IconArrow>
+            ) : null}
+          </Link>
+        ))}
       </div>
       <div className="flex items-center gap-1">
         <form
