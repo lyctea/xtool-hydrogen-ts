@@ -48,7 +48,7 @@ export function DesktopHeader({
             key={item.id}
             to={item.to}
             target={item.target}
-            className="flex py-2 px-4 text-sm font-medium hover:underline underline-offset-8"
+            className="flex p-2 text-sm font-medium hover:underline underline-offset-8"
           >
             <span
               dangerouslySetInnerHTML={{__html: item.title}}
@@ -59,25 +59,6 @@ export function DesktopHeader({
         ))}
       </div>
       <div className="flex items-center gap-1">
-        <form
-          action={`/${countryCode ? countryCode + '/' : ''}search`}
-          className="flex items-center gap-2"
-        >
-          <Input
-            className={
-              isHome
-                ? 'focus:border-contrast/20 dark:focus:border-primary/20'
-                : 'focus:border-primary/20'
-            }
-            type="search"
-            variant="minisearch"
-            placeholder="Search"
-            name="q"
-          />
-          <button type="submit" className={styles.button}>
-            <IconSearch />
-          </button>
-        </form>
         <Link to={'/account'} className={styles.button}>
           <IconAccount />
         </Link>
