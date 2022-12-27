@@ -9,6 +9,7 @@ import {
   IconSearch,
   Input,
 } from '~/components';
+import MyIcon from '../elements/MyIcon';
 
 export function DesktopHeader({
   countryCode,
@@ -31,7 +32,7 @@ export function DesktopHeader({
   return (
     <header
       role="banner"
-      className="w-full flex justify-around items-center h-11 bg-purple-200 px-40"
+      className="w-full flex justify-around items-center h-11 bg-purple-200 px-20"
     >
       <Link to="/">
         <Image
@@ -47,15 +48,13 @@ export function DesktopHeader({
             key={item.id}
             to={item.to}
             target={item.target}
-            className="flex p-2 px-4 text-sm font-medium hover:underline underline-offset-8"
+            className="flex py-2 px-4 text-sm font-medium hover:underline underline-offset-8"
           >
             <span
               dangerouslySetInnerHTML={{__html: item.title}}
               className="pr-1"
             ></span>
-            {item.items.length ? (
-              <IconArrow direction="down" className="w-3"></IconArrow>
-            ) : null}
+            {item.items.length ? <MyIcon icon="#icon-arrow-down" /> : null}
           </Link>
         ))}
       </div>
