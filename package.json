@@ -39,6 +39,7 @@
   "dependencies": {
     "@headlessui/react": "^1.7.0",
     "@shopify/hydrogen": "^1.6.5",
+    "ahooks": "^3.7.4",
     "clsx": "^1.1.1",
     "graphql-tag": "^2.12.6",
     "gsap": "^3.11.4",

@@ -18,17 +18,17 @@ export function Layout({children}: {children: React.ReactNode}) {
   return (
     <>
       <div className="flex flex-col min-h-screen">
-        <div className="">
+        {/* <div className="">
           <a href="#mainContent" className="sr-only">
             Skip to content
           </a>
-        </div>
+        </div> */}
         <Suspense fallback={<Header title={SHOP_NAME_FALLBACK} />}>
           <HeaderWithMenu />
         </Suspense>
-        <main role="main" id="mainContent" className="flex-grow">
+        {/* <main role="main" id="mainContent" className="flex-grow">
           {children}
-        </main>
+        </main> */}
       </div>
       <Suspense fallback={<Footer />}>
         <FooterWithMenu />

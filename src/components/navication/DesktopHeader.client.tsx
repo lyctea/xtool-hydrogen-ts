@@ -1,22 +1,12 @@
-import {Link, useUrl, useCart, Image} from '@shopify/hydrogen';
+import {Link, useCart, Image} from '@shopify/hydrogen';
 import type {EnhancedMenu} from '~/lib/utils';
-import {
-  Heading,
-  IconAccount,
-  IconArrow,
-  IconBag,
-  IconMenu,
-  IconSearch,
-  Input,
-} from '~/components';
+import {IconAccount, IconBag} from '~/components';
 import MyIcon from '../elements/MyIcon';
 
 export function DesktopHeader({
-  countryCode,
   isHome,
   menu,
   openCart,
-  title,
 }: {
   countryCode?: string | null;
   isHome: boolean;
@@ -32,7 +22,7 @@ export function DesktopHeader({
   return (
     <header
       role="banner"
-      className="w-full flex justify-around items-center h-11 bg-purple-200 px-20"
+      className="relative w-full flex justify-around items-center h-11 bg-purple-200 px-20"
     >
       <Link to="/">
         <Image
@@ -48,13 +38,19 @@ export function DesktopHeader({
             key={item.id}
             to={item.to}
             target={item.target}
-            className="flex p-2 text-sm font-medium hover:underline underline-offset-8"
+            className="flex p-2 text-sm font-medium hover:underline  hover:bg-gray-300"
           >
             <span
               dangerouslySetInnerHTML={{__html: item.title}}
               className="pr-1"
             ></span>
             {item.items.length ? <MyIcon icon="#icon-arrow-down" /> : null}
+            <section className="hidden absolute w-screen left-0 bg-slate-600">
+              hover secton
+              {(item?.items || []).map((subitem) => (
+                <div key={subitem.id}>sub items</div>
+              ))}
+            </section>
           </Link>
         ))}
       </div>
